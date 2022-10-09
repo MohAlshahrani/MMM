@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <papi.h>
+#include "papi.h"
+#include "papi_internal.h"
+#include "papi_vector.h"
+#include "papi_memory.h"    /* defines papi_malloc(), etc. */
+
 
 int main() {
     float real_time, proc_time, mflops;
