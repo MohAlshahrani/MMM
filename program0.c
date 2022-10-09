@@ -30,11 +30,17 @@ int main() {
             }
         }
     }
-    if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
+
+    if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
     {
         printf("retval: %d\n", retval);
         exit(1);
     }
-    
+
+
+    printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
+           real_time, proc_time,flpops,mflops);
+
+    exit(0);
     return 0;
 }
