@@ -14,8 +14,8 @@ int main() {
     int NB,MU,NU,KU;
     MU = NU = 2;
     KU = 1 ;
-    N = M = K = NB = 1000;
-    float A[N][K],B[K][M],C[N][M];
+    N = M = K = NB = 50;
+    double A[N][K],B[K][M],C[N][M];
     for (i = 0 ; i < K; i++) {
         for (j = 0; j < K; j++) {
             A[i][j] = rand();
