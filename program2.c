@@ -4,19 +4,32 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-/*
+#include <papi.h>
+
 int main() {
+    float real_time, proc_time, mflops;
+    long long flpops;
+    int retval;
+
     int i,j,k,M,N,K;
     int NB,MU,NU,KU;
     MU = NU = 2;
     KU = 2 ;
-    N = M = K = NB = 1000;
-    float A[N][K],B[K][M],C[N][M];
+    N = M = K = NB = 10;
+    double A[N][K],B[K][M],C[N][M];
     for (i = 0 ; i < K; i++) {
         for (j = 0; j < K; j++) {
             A[i][j] = rand();
             B[i][j] = rand();
         }
+    }
+
+    if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
+    {
+        printf("Could not initialise PAPI_flops \n");
+        printf("Your platform may not support floating point operation event.\n");
+        printf("retval: %d\n", retval);
+        exit(1);
     }
 // part (b) asks for micro blocking
 // read micro blocking and loop unrolling
@@ -84,7 +97,16 @@ int main() {
         }
     }
 
+    if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
+    {
+        printf("retval: %d\n", retval);
+        exit(1);
+    }
 
+    printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
+           real_time, proc_time,flpops,mflops);
+
+    exit(0);
+
+    return 0;
 }
-
-*/
