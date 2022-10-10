@@ -9,13 +9,14 @@ int main() {
 
     int i,j,k,m,K,n ;
     n = m = K = 10;
-    float a[n][k],b[k][m],c[n][m];
-    for (i = 0 ; i < K; i++) {
-        for (j = 0; j < K; j++) {
+    int16_t a[n][K],b[K][m],c[n][m] ;
+    for (i = 0 ; i < n; i++) {
+        for (j = 0; j < m; j++) {
             a[i][j] = rand();
             b[i][j] = rand();
         }
     }
+
     if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
     {
         printf("Could not initialise PAPI_flops \n");
@@ -23,6 +24,7 @@ int main() {
         printf("retval: %d\n", retval);
         exit(1);
     }
+
     for(i=0; i<n; i++) {
         for (j = 0; j < m; j++) {
             for (k = 0; k < K; k++) {
@@ -37,10 +39,10 @@ int main() {
         exit(1);
     }
 
-
     printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
            real_time, proc_time,flpops,mflops);
 
     exit(0);
+
     return 0;
 }

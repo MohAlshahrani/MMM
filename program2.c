@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+/*
 int main() {
     int i,j,k,M,N,K;
     int NB,MU,NU,KU;
@@ -87,3 +87,4 @@ int main() {
 
 }
 
+*/

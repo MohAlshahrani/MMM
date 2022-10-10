@@ -1,7 +1,7 @@
 //
 // Created by Mohammed Alshahrani on 10/6/22.
 //
-
+/*
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -104,3 +104,4 @@ int main() {
 
 }
 
+*/
