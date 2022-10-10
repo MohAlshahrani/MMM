@@ -9,7 +9,7 @@ int main() {
 
     int i,j,k,m,K,n ;
     n = m = K = 1000;
-    int16_t a[n][K],b[K][m],c[n][m] ;
+    float a[n][K],b[K][m],c[n][m] ;
     for (i = 0 ; i < n; i++) {
         for (j = 0; j < m; j++) {
             a[i][j] = rand();
