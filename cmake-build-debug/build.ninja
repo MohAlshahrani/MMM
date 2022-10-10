@@ -52,12 +52,6 @@ build CMakeFiles/cse557_assignment1.dir/program0.c.o: C_COMPILER__cse557_assignm
   OBJECT_DIR = CMakeFiles/cse557_assignment1.dir
   OBJECT_FILE_DIR = CMakeFiles/cse557_assignment1.dir
 
-build CMakeFiles/cse557_assignment1.dir/Program1.c.o: C_COMPILER__cse557_assignment1_Debug /Users/mohammed/CLionProjects/cse557_assignment1/cmake-build-debug/Program1.c || cmake_object_order_depends_target_cse557_assignment1
-  DEP_FILE = CMakeFiles/cse557_assignment1.dir/Program1.c.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu99
-  OBJECT_DIR = CMakeFiles/cse557_assignment1.dir
-  OBJECT_FILE_DIR = CMakeFiles/cse557_assignment1.dir
-
 build CMakeFiles/cse557_assignment1.dir/program2.c.o: C_COMPILER__cse557_assignment1_Debug /Users/mohammed/CLionProjects/cse557_assignment1/program2.c || cmake_object_order_depends_target_cse557_assignment1
   DEP_FILE = CMakeFiles/cse557_assignment1.dir/program2.c.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu99
@@ -70,6 +64,12 @@ build CMakeFiles/cse557_assignment1.dir/program3.c.o: C_COMPILER__cse557_assignm
   OBJECT_DIR = CMakeFiles/cse557_assignment1.dir
   OBJECT_FILE_DIR = CMakeFiles/cse557_assignment1.dir
 
+build CMakeFiles/cse557_assignment1.dir/program1.c.o: C_COMPILER__cse557_assignment1_Debug /Users/mohammed/CLionProjects/cse557_assignment1/program1.c || cmake_object_order_depends_target_cse557_assignment1
+  DEP_FILE = CMakeFiles/cse557_assignment1.dir/program1.c.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu99
+  OBJECT_DIR = CMakeFiles/cse557_assignment1.dir
+  OBJECT_FILE_DIR = CMakeFiles/cse557_assignment1.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target cse557_assignment1
@@ -78,7 +78,7 @@ build CMakeFiles/cse557_assignment1.dir/program3.c.o: C_COMPILER__cse557_assignm
 #############################################
 # Link the executable cse557_assignment1
 
-build cse557_assignment1: C_EXECUTABLE_LINKER__cse557_assignment1_Debug CMakeFiles/cse557_assignment1.dir/program0.c.o CMakeFiles/cse557_assignment1.dir/Program1.c.o CMakeFiles/cse557_assignment1.dir/program2.c.o CMakeFiles/cse557_assignment1.dir/program3.c.o
+build cse557_assignment1: C_EXECUTABLE_LINKER__cse557_assignment1_Debug CMakeFiles/cse557_assignment1.dir/program0.c.o CMakeFiles/cse557_assignment1.dir/program2.c.o CMakeFiles/cse557_assignment1.dir/program3.c.o CMakeFiles/cse557_assignment1.dir/program1.c.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
   OBJECT_DIR = CMakeFiles/cse557_assignment1.dir
   POST_BUILD = :

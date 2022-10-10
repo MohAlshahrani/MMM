@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include <papi.h>
+//#include <papi.h>
 
 int main() {
     //float real_time, proc_time, mflops;
