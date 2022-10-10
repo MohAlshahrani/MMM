@@ -8,7 +8,7 @@ int main() {
     int retval;
 
     int i,j,k,m,K,n ;
-    n = m = K = 10;
+    n = m = K = 1000;
     int16_t a[n][K],b[K][m],c[n][m] ;
     for (i = 0 ; i < n; i++) {
         for (j = 0; j < m; j++) {
