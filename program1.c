@@ -85,19 +85,33 @@ float program_one(int NB){
         printf("retval: %d\n", retval);
         exit(1);
     }
-    //printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
-      //     real_time, proc_time,flpops,mflops);
-    //exit(0);
+    printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
+           real_time, proc_time,flpops,mflops);
 
-    return flpops;
+
+    return 0;
 }
 
 int main() {
 
-    float n1 = program_one(16);
-    printf("%f",n1);
-    float n2 = program_one(20);
-    printf("%f",n2);
+    program_one(16);
+    program_one(20);
+    program_one(24);
+    program_one(28);
+    program_one(32);
+    program_one(36);
+    program_one(40);
+    program_one(44);
+    program_one(48);
+    program_one(52);
+    program_one(56);
+    program_one(60);
+    program_one(64);
+    program_one(68);
+    program_one(72);
+    program_one(76);
+    program_one(80);
+
 
 return 0;
 }
