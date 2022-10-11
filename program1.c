@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include <papi.h>
+//#include <papi.h>
 
 int main() {
     float real_time, proc_time, mflops;
@@ -12,14 +12,14 @@ int main() {
 
     int i,j,k,M,N,K;
     int NB,MU,NU,KU;
-    MU = 2;
-    NU = 2;
-    KU = 2 ;
-    int size = 10;
+    MU = 1;
+    NU = 1;
+    KU = 1 ;
+    int size = 100;
     N = size;
     M = size;
     K = size;
-    NB =2; // revise this
+    NB = 100; // revise this
     int A[N][K],B[K][M],C[N][M];
 
     for (i = 0 ; i < K; i++) {
@@ -28,7 +28,7 @@ int main() {
             B[i][j] = rand();
         }
     }
-
+/*
     if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
     {
         printf("Could not initialise PAPI_flops \n");
@@ -36,7 +36,7 @@ int main() {
         printf("retval: %d\n", retval);
         exit(1);
     }
-
+*/
     for (i = 0 ; i < N ; i += NB) {
         for (j = 0 ; j < M ; j += NB) {
             for (k = 0 ; k < K ; k += NB) {
@@ -47,19 +47,30 @@ int main() {
                     for (int j0 = j; j0 < (j + NB); j0 += NU) {
                         for (int k0 = k; k0 < (k + NB); k0 += KU) {
 
-// micro-MMM loop nest (j00, i00)
+
+                            // micro-MMM loop nest (j00, i00)
+                            double temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8,temp9;
                             for(int k00=k0; k00<=(k0 + KU); k00++){
-                                double temp1,temp2,temp3,temp4;
-                                for( int i1 = 0 ; i1 < 4 ; i1++ ){
-                                temp1 = A[i0*i1][k00]*B[k00][j0*i1];
-                                C[i0*i1][j0*i1] = C[i0*i1][j0*i1] + temp1;
-                                temp2 = A[i0*i1+1][k00]*B[k00][j0*i1];
-                                C[i0*i1+1][j0*i1+1] = C[i0*i1+1][j0*i1+1] + temp2;
-                                temp3 = A[i0*i1+2][k00]*B[k00][j0*i1];
-                                C[i0*i1+2][j0*i1+2] = C[i0*i1+2][j0*i1+2] + temp3;
-                                temp4 = A[i0*i1+3][k00]*B[k00][j0*i1];
-                                C[i0*i1+3][j0*i1+3] = C[i0*i1+3][j0*i1+3] + temp4;
-                                }
+                                int j00 = NU * k00;
+                                temp1 = A[MU*j00][k00]*B[k00][j00] ;
+                                C[(MU*j00)][j00] += temp1 ;
+                                temp2 = A[MU*j00+1][k00]*B[k00][j00];
+                                C[MU*j00+1][j00] += temp2 ;
+                                temp3 = A[MU*j00+2][k00]*B[k00][j00];
+                                C[MU*j00+2][j00] += temp3;
+                                temp4 = A[MU*j00][k00]*B[k00][j00+1];
+                                C[MU*j00][j00+1] += temp4;
+                                temp5 = A[MU*j00+1][k00]*B[k00][j00+1];
+                                C[MU*j00+1][j00+1] += temp5;
+                                temp6 = A[MU*j00+2][k00]*B[k00][j00+1];
+                                C[MU*j00+2][j00+1] += temp6;
+                                temp7 = A[MU*j00][k00]*B[k00][j00+2];
+                                C[MU*j00][j00+2] += temp7 ;
+                                temp8 = A[MU*j00+1][k00]*B[k00][j00+2];
+                                C[MU*j00+1][j00+2] += temp8;
+                                temp9 = A[MU*j00+2][k00]*B[k00][j00+2];
+                                C[MU*j00+2][j00+2] += temp9;
+                                printf("loop %d \n",k00);
                             }
                         }
                     }
@@ -67,17 +78,16 @@ int main() {
             }
         }
     }
-
+/*
     if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
     {
         printf("retval: %d\n", retval);
         exit(1);
     }
-
     printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
            real_time, proc_time,flpops,mflops);
-
     exit(0);
+*/
     return 0;
 }
 

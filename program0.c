@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <papi.h>
+//#include <papi.h>
 
-int main() {
+//int main() {
+    /*
     float real_time, proc_time, mflops;
     long long flpops;
     int retval;
@@ -16,7 +17,7 @@ int main() {
             b[i][j] = rand();
         }
     }
-
+/*
     if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
     {
         printf("Could not initialise PAPI_flops \n");
@@ -32,7 +33,7 @@ int main() {
             }
         }
     }
-
+/*
     if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
     {
         printf("retval: %d\n", retval);
@@ -43,6 +44,7 @@ int main() {
            real_time, proc_time,flpops,mflops);
 
     exit(0);
+*/
+   // return 0;
 
-    return 0;
-}
+//}
