@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <papi.h>
-#include <libc.h>
+
 
 float program_one(int NB){
     float real_time, proc_time, mflops;
@@ -95,7 +95,6 @@ float program_one(int NB){
 int main() {
 
     program_one(16);
-    sleep(100);
     program_one(20);
     program_one(24);
     program_one(28);
