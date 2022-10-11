@@ -3,23 +3,23 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-//#include <papi.h>
+#include <papi.h>
 
-int main() {
+float program_one(int NB){
     float real_time, proc_time, mflops;
     long long flpops;
     int retval;
 
     int i,j,k,M,N,K;
-    int NB,MU,NU,KU;
+    int MU,NU,KU;
     MU = 1;
     NU = 1;
     KU = 1 ;
-    int size = 100;
+    int size = NB;
     N = size;
     M = size;
     K = size;
-    NB = 100; // revise this
+    // revise this
     int A[N][K],B[K][M],C[N][M];
 
     for (i = 0 ; i < K; i++) {
@@ -28,7 +28,7 @@ int main() {
             B[i][j] = rand();
         }
     }
-/*
+
     if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
     {
         printf("Could not initialise PAPI_flops \n");
@@ -36,7 +36,7 @@ int main() {
         printf("retval: %d\n", retval);
         exit(1);
     }
-*/
+
     for (i = 0 ; i < N ; i += NB) {
         for (j = 0 ; j < M ; j += NB) {
             for (k = 0 ; k < K ; k += NB) {
@@ -70,7 +70,7 @@ int main() {
                                 C[MU*j00+1][j00+2] += temp8;
                                 temp9 = A[MU*j00+2][k00]*B[k00][j00+2];
                                 C[MU*j00+2][j00+2] += temp9;
-                                printf("loop %d \n",k00);
+                                //printf("loop %d \n",k00);
                             }
                         }
                     }
@@ -78,7 +78,7 @@ int main() {
             }
         }
     }
-/*
+
     if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
     {
         printf("retval: %d\n", retval);
@@ -87,7 +87,29 @@ int main() {
     printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
            real_time, proc_time,flpops,mflops);
     exit(0);
-*/
+
+    return 0;
+}
+
+int main() {
+    program_one(16);
+    program_one(20);
+    program_one(24);
+    program_one(28);
+    program_one(32);
+    program_one(36);
+    program_one(40);
+    program_one(44);
+    program_one(48);
+    program_one(52);
+    program_one(56);
+    program_one(60);
+    program_one(64);
+    program_one(68);
+    program_one(72);
+    program_one(76);
+    program_one(80);
+
     return 0;
 }
 
