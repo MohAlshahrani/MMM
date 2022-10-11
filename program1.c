@@ -89,15 +89,15 @@ float program_one(int NB){
            real_time, proc_time,flpops,mflops);
     exit(0);
 
-    return 0;
+    return flpops;
 }
 
 int main() {
 
-    program_one(16);
-
-    program_one(20);
-
+    float n1 = program_one(16);
+    printf("%f",n1);
+    float n2 = program_one(20);
+    printf("%f",n2);
 
 return 0;
 }
