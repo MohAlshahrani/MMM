@@ -92,6 +92,7 @@ float program_one(int NB){
 }
 
 int main() {
+    printf("mo1");
     program_one(16);
     program_one(20);
     program_one(24);
@@ -101,6 +102,7 @@ int main() {
     program_one(40);
     program_one(44);
     program_one(48);
+    printf("mo2");
     program_one(52);
     program_one(56);
     program_one(60);
@@ -109,6 +111,7 @@ int main() {
     program_one(72);
     program_one(76);
     program_one(80);
+    printf("mo3");
 
     return 0;
 }
