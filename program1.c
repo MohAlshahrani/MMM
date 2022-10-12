@@ -3,13 +3,9 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include <papi.h>
-
+#include <time.h>
 
 float program_one(int NB){
-    float real_time, proc_time, mflops;
-    long long flpops;
-    int retval;
 
     int i,j,k,M,N,K;
     int MU,NU,KU;
@@ -20,8 +16,9 @@ float program_one(int NB){
     N = size;
     M = size;
     K = size;
-    // revise this
-    int A[N][K],B[K][M],C[N][M];
+    uint64_t flops = 0 ;
+    float A[N][K],B[K][M],C[N][M];
+
 
     for (i = 0 ; i < K; i++) {
         for (j = 0; j < K; j++) {
@@ -30,14 +27,7 @@ float program_one(int NB){
         }
     }
 
-    if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
-    {
-        printf("Could not initialise PAPI_flops \n");
-        printf("Your platform may not support floating point operation event.\n");
-        printf("retval: %d\n", retval);
-        exit(1);
-    }
-
+    time_t begin = clock();
     for (i = 0 ; i < N ; i += NB) {
         for (j = 0 ; j < M ; j += NB) {
             for (k = 0 ; k < K ; k += NB) {
@@ -71,6 +61,8 @@ float program_one(int NB){
                                 C[MU*j00+1][j00+2] += temp8;
                                 temp9 = A[MU*j00+2][k00]*B[k00][j00+2];
                                 C[MU*j00+2][j00+2] += temp9;
+
+                                flops += 19;
                                 //printf("loop %d \n",k00);
                             }
                         }
@@ -79,16 +71,10 @@ float program_one(int NB){
             }
         }
     }
+    time_t end = clock();
 
-    if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
-    {
-        printf("retval: %d\n", retval);
-        exit(1);
-    }
-    printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
-           real_time, proc_time,flpops,mflops);
-
-
+    double flops_s = flops/(end - begin);
+    printf("NB = %d \t FLOPS/s = %d \n", NB, flops_s);
     return 0;
 }
 
@@ -111,7 +97,6 @@ int main() {
     program_one(72);
     program_one(76);
     program_one(80);
-
 
 return 0;
 }
