@@ -3,24 +3,20 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-//#include <papi.h>
+#include <time.h>
 
-int main() {
-    float real_time, proc_time, mflops;
-    long long flpops;
-    int retval;
-
+float program_two(int NB){
     int i,j,k,M,N,K;
-    int NB,MU,NU,KU;
+    int MU,NU,KU;
     MU = 1;
     NU = 1;
     KU = 2 ;
-    int size = 20;
+    int size = NB;
     N = size;
     M = size;
     K = size;
-    NB = 20; // revise this
-    int A[N][K],B[K][M],C[N][M];
+    uint64_t flops = 0 ;
+    float A[N][K],B[K][M],C[N][M];
 
     for (i = 0 ; i < K; i++) {
         for (j = 0; j < K; j++) {
@@ -28,15 +24,9 @@ int main() {
             B[i][j] = rand();
         }
     }
-/*
-    if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
-    {
-        printf("Could not initialise PAPI_flops \n");
-        printf("Your platform may not support floating point operation event.\n");
-        printf("retval: %d\n", retval);
-        exit(1);
-    }
-*/
+
+    time_t begin = clock();
+
     for (i = 0 ; i < N ; i += NB) {
         for (j = 0 ; j < M ; j += NB) {
             for (k = 0 ; k < K ; k += NB) {
@@ -55,24 +45,45 @@ int main() {
                             temp2 = A[i0][k0+1]*B[k0+1][j0];
                             C[i0][j0] += temp2;
 
+                            flops += 4;
 
-                                printf("loop %d \n",k0);
-                            }
+
                         }
                     }
                 }
             }
         }
-/*
-    if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
-    {
-        printf("retval: %d\n", retval);
-        exit(1);
     }
-    printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
-           real_time, proc_time,flpops,mflops);
-    exit(0);
-*/
+
+    time_t end = clock();
+
+    double flops_s = flops/(end - begin);
+    printf("NB = %d \t FLOPS/s = %d \n", NB, flops_s);
+
+    return 0;
+}
+
+
+int main() {
+
+    program_two(16);
+    program_two(20);
+    program_two(24);
+    program_two(28);
+    program_two(32);
+    program_two(36);
+    program_two(40);
+    program_two(44);
+    program_two(48);
+    program_two(52);
+    program_two(56);
+    program_two(60);
+    program_two(64);
+    program_two(68);
+    program_two(72);
+    program_two(76);
+    program_two(80);
+
     return 0;
 }
 

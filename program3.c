@@ -3,23 +3,20 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-//#include <papi.h>
+#include <time.h>
 
-int main() {
-    float real_time, proc_time, mflops;
-    long long flpops;
-    int retval;
-
+float program_three(int NB){
     int i,j,k,M,N,K;
-    int NB,MU,NU,KU;
+    int MU,NU,KU;
     MU = 1;
     NU = 1;
     KU = 4 ;
-    int size = 20;
+    int size = NB;
     N = size;
     M = size;
     K = size;
-    NB = 20; // revise this
+    uint64_t flops = 0 ;
+
     int A[N][K],B[K][M],C[N][M];
 
     for (i = 0 ; i < K; i++) {
@@ -28,15 +25,7 @@ int main() {
             B[i][j] = rand();
         }
     }
-/*
-    if ( (retval = PAPI_flops_rate(PAPI_FP_OPS, &real_time, &proc_time, &flpops, &mflops)) < PAPI_OK )
-    {
-        printf("Could not initialise PAPI_flops \n");
-        printf("Your platform may not support floating point operation event.\n");
-        printf("retval: %d\n", retval);
-        exit(1);
-    }
-*/
+    time_t begin = clock();
     for (i = 0 ; i < N ; i += NB) {
         for (j = 0 ; j < M ; j += NB) {
             for (k = 0 ; k < K ; k += NB) {
@@ -61,25 +50,41 @@ int main() {
                             temp4 = A[i0][k0+3]*B[k0+3][j0];
                             C[i0][j0] += temp4;
 
-
-
-                            printf("loop %d \n",k0);
+                            flops += 8;
                         }
                     }
                 }
             }
         }
     }
-/*
-    if((retval=PAPI_flops_rate(PAPI_FP_OPS,&real_time, &proc_time, &flpops, &mflops))<PAPI_OK)
-    {
-        printf("retval: %d\n", retval);
-        exit(1);
-    }
-    printf("Real_time: %f Proc_time: %f flpops: %lld MFLOPS: %f\n",
-           real_time, proc_time,flpops,mflops);
-    exit(0);
-*/
+    time_t end = clock();
+
+    double flops_s = flops/(end - begin);
+    printf("NB = %d \t FLOPS/s = %d \n", NB, flops_s);
+
     return 0;
+}
+
+int main() {
+
+    program_three(16);
+    program_three(20);
+    program_three(24);
+    program_three(28);
+    program_three(32);
+    program_three(36);
+    program_three(40);
+    program_three(44);
+    program_three(48);
+    program_three(52);
+    program_three(56);
+    program_three(60);
+    program_three(64);
+    program_three(68);
+    program_three(72);
+    program_three(76);
+    program_three(80);
+
+
 }
 
