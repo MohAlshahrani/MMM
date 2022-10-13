@@ -38,14 +38,9 @@ float program_zero_a(int NB){
 
 int main() {
 
-    program_zero_a(8);
-    program_zero_a(16);
-    program_zero_a(32);
-    program_zero_a(64);
-    program_zero_a(128);
-    program_zero_a(256);
+
     program_zero_a(512);
-    program_zero_a(1024);
+
     return 0;
 
 }

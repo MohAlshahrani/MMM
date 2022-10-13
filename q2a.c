@@ -73,7 +73,7 @@ int main() {
     program_two_a(128);
     program_two_a(256);
     program_two_a(512);
-    program_two_a(1024);
+
 
 
     return 0;
