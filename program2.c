@@ -38,7 +38,7 @@ float program_two(int NB){
                         for (int k0 = k; k0 < (k + NB); k0 += KU) {
 
 
-                            double temp1,temp2;
+                            float temp1,temp2;
                             temp1 = A[i0][k0]*B[k0][j0];
                             C[i0][j0] += temp1;
 
@@ -58,7 +58,7 @@ float program_two(int NB){
     time_t end = clock();
 
     double flops_s = flops/(end - begin);
-    printf("NB = %d \t FLOPS/s = %d \n", NB, flops_s);
+    printf(" %lf \n",  flops_s);
 
     return 0;
 }

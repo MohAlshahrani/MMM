@@ -74,9 +74,10 @@ float program_one(int NB){
     time_t end = clock();
 
     double flops_s = flops/(end - begin);
-    printf("NB = %d \t FLOPS/s = %d \n", NB, flops_s);
+    printf(" %lf \n",  flops_s);
     return 0;
 }
+
 
 int main() {
 

@@ -5,19 +5,18 @@
 #include <stdlib.h>
 #include <time.h>
 
-float program_three(int NB){
+float program_two(int NB){
     int i,j,k,M,N,K;
     int MU,NU,KU;
     MU = 1;
     NU = 1;
-    KU = 4 ;
+    KU = 2 ;
     int size = NB;
     N = size;
     M = size;
     K = size;
     uint64_t flops = 0 ;
-
-    int A[N][K],B[K][M],C[N][M];
+    float A[N][K],B[K][M],C[N][M];
 
     for (i = 0 ; i < K; i++) {
         for (j = 0; j < K; j++) {
@@ -25,9 +24,11 @@ float program_three(int NB){
             B[i][j] = rand();
         }
     }
+
     time_t begin = clock();
-    for (i = 0 ; i < N ; i += NB) {
-        for (j = 0 ; j < M ; j += NB) {
+
+    for (j = 0 ; j < N ; j += NB) {
+        for ( i= 0 ; i < M ; i += NB) {
             for (k = 0 ; k < K ; k += NB) {
 
 // mini-MMM loop nest (i0, j0, k0)
@@ -37,26 +38,23 @@ float program_three(int NB){
                         for (int k0 = k; k0 < (k + NB); k0 += KU) {
 
 
-                            float temp1,temp2,temp3,temp4;
+                            float temp1,temp2;
                             temp1 = A[i0][k0]*B[k0][j0];
                             C[i0][j0] += temp1;
 
                             temp2 = A[i0][k0+1]*B[k0+1][j0];
                             C[i0][j0] += temp2;
 
-                            temp3 = A[i0][k0+2]*B[k0+2][j0];
-                            C[i0][j0] += temp3;
+                            flops += 4;
 
-                            temp4 = A[i0][k0+3]*B[k0+3][j0];
-                            C[i0][j0] += temp4;
 
-                            flops += 8;
                         }
                     }
                 }
             }
         }
     }
+
     time_t end = clock();
 
     double flops_s = flops/(end - begin);
@@ -68,24 +66,24 @@ float program_three(int NB){
 
 int main() {
 
-    program_three(16);
-    program_three(20);
-    program_three(24);
-    program_three(28);
-    program_three(32);
-    program_three(36);
-    program_three(40);
-    program_three(44);
-    program_three(48);
-    program_three(52);
-    program_three(56);
-    program_three(60);
-    program_three(64);
-    program_three(68);
-    program_three(72);
-    program_three(76);
-    program_three(80);
+    program_two(16);
+    program_two(20);
+    program_two(24);
+    program_two(28);
+    program_two(32);
+    program_two(36);
+    program_two(40);
+    program_two(44);
+    program_two(48);
+    program_two(52);
+    program_two(56);
+    program_two(60);
+    program_two(64);
+    program_two(68);
+    program_two(72);
+    program_two(76);
+    program_two(80);
 
-
+    return 0;
 }
 
